@@ -1,6 +1,6 @@
 {
     "name": "@uclif/ng-schematics",
-    "version": "16.0.0",
+    "version": "16.2000.0",
     "description": "Schematics for setting up and configuring client projects",
     "scripts": {
         "ng": "node ./node_modules/@angular/cli/bin/ng",
