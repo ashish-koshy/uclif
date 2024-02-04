@@ -1,6 +1,6 @@
 {
     "name": "@uclif/ng-core",
-    "version": "16.0.0",
+    "version": "16.100.0",
     "scripts": {
         "release": "standard-version"
     },
