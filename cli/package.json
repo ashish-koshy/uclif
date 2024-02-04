@@ -1,6 +1,6 @@
 {
     "name": "@uclif/cli",
-    "version": "16.0.0",
+    "version": "16.0.1",
     "description": "CLI tool for client side projects",
     "author": "Ashish Koshy",
     "bin": {
