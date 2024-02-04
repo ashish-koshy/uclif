@@ -1,0 +1,26 @@
+
+steps:
+- script: 'npm config set --location project ${{ parameters.packageNameSpace }}:registry=//pkgs.dev.azure.com/${{ parameters.packageOrgName }}${{ parameters.packageRegistry }}'
+  displayName: 'Set release registry'
+  condition: and(succeeded(), eq('${{ parameters.masterTrigger }}', 'true'))
+  workingDirectory: '${{ parameters.workingDirectory }}'
+
+- script: 'npm config set --location project //pkgs.dev.azure.com/${{ parameters.packageOrgName }}:username=${{ parameters.packagePublishAuthName }} //pkgs.dev.azure.com/${{ parameters.packageOrgName }}:_password=${{ parameters.packagePublishAuthToken }}'
+  displayName: 'Set release credentials'
+  condition: and(succeeded(), eq('${{ parameters.masterTrigger }}', 'true'))
+  workingDirectory: '${{ parameters.workingDirectory }}'
+
+- task: npmAuthenticate@0
+  displayName: Authenticate release
+  condition: and(succeeded(), eq('${{ parameters.masterTrigger }}', 'true'))
+  inputs:
+    workingFile: '${{ parameters.workingDirectory }}.npmrc'
+
+- task: Npm@1
+  displayName: 'Publish package'
+  condition: and(succeeded(), eq('${{ parameters.masterTrigger }}', 'true'))
+  inputs:
+    command: 'publish'
+    publishRegistry: 'useFeed'
+    publishFeed: '${{ parameters.packageFeed }}'
+    workingDir: '${{ parameters.workingDirectory }}${{ parameters.packagePublishPath }}'

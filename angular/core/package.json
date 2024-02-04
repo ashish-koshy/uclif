@@ -1,0 +1,80 @@
+{
+    "name": "ng-workspace",
+    "version": "0.0.0",
+    "scripts": {
+        "ng": "node ./node_modules/@angular/cli/bin/ng",
+        "e2e": "ng e2e",
+        "lint": "npm run eslint .",
+        "test": "npm run ng test -- --browsers ChromeHeadless --watch false",
+        "schematics": "node node_modules/@angular-devkit/schematics-cli/bin/schematics.js",
+        "build": "npm run ng build @uclif/ng-core",
+        "husky": "husky",
+        "lint-staged": "lint-staged",
+        "pretty-quick": "pretty-quick",
+        "commitlint": "commitlint --edit",
+        "prepare": "cd ../../ && husky install ./angular/core/.husky",
+        "eslint": "eslint",
+        "prettier": "prettier",
+        "release": "cd projects/uclif/core && npm run release"
+    },
+    "private": true,
+    "dependencies": {
+        "@angular/animations": "^15.0.0",
+        "@angular/common": "^15.0.0",
+        "@angular/compiler": "^15.0.0",
+        "@angular/core": "^15.0.0",
+        "@angular/forms": "^15.0.0",
+        "@angular/platform-browser": "^15.0.0",
+        "@angular/platform-browser-dynamic": "^15.0.0",
+        "@angular/router": "^15.0.0",
+        "rxjs": "~7.5.0",
+        "tslib": "^2.3.0",
+        "zone.js": "~0.12.0"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^15.0.5",
+        "@angular-eslint/eslint-plugin": "^15.0.0",
+        "@angular-eslint/eslint-plugin-template": "^15.0.0",
+        "@angular-eslint/template-parser": "^15.0.0",
+        "@angular/cli": "~15.0.0",
+        "@angular/compiler-cli": "^15.0.0",
+        "@commitlint/cli": "^18.4.3",
+        "@commitlint/config-conventional": "^18.4.3",
+        "@types/jasmine": "~4.3.0",
+        "@types/node": "^12.11.1",
+        "@typescript-eslint/eslint-plugin": "^5.60.0",
+        "@typescript-eslint/parser": "^5.60.0",
+        "eslint": "^8.0.0",
+        "eslint-config-prettier": "^8.10.0",
+        "husky": "^8.0.3",
+        "jasmine-core": "~4.5.0",
+        "jasmine-spec-reporter": "~5.0.0",
+        "karma": "~6.4.0",
+        "karma-chrome-launcher": "~3.1.0",
+        "karma-coverage": "~2.2.0",
+        "karma-coverage-istanbul-reporter": "~3.0.2",
+        "karma-jasmine": "~5.1.0",
+        "karma-jasmine-html-reporter": "~2.0.0",
+        "karma-junit-reporter": "^2.0.1",
+        "karma-spec-reporter": "^0.0.36",
+        "lint-staged": "^15.1.0",
+        "ng-packagr": "^15.0.0",
+        "node-html-parser": "^6.1.10",
+        "prettier": "^2.5.0",
+        "pretty-quick": "^3.1.3",
+        "standard-version": "^9.5.0",
+        "typescript": "~4.8.2"
+    },
+    "engines": {
+        "node": "^14.20.0 || ^16.13.0 || ^18.10.0",
+        "npm": "^6.x.x || ^8.x.x || ^9.x.x"
+    },
+    "lint-staged": {
+        "*.{js,ts}": [
+            "npm run eslint -- --fix"
+        ],
+        "*.{js,ts,html,css,scss,json}": [
+            "npm run pretty-quick -- --staged"
+        ]
+    }
+}

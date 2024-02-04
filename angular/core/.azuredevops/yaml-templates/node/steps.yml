@@ -1,0 +1,43 @@
+
+steps:
+- task: NodeTool@0
+  displayName: 'Specify node version'
+  inputs:
+    versionSpec: '${{ parameters.nodeVersion }}'
+
+- script: 'npm ci ${{ parameters.installParams }}'
+  displayName: 'Install dependencies'
+  workingDirectory: '${{ parameters.workingDirectory }}'
+
+- script: 'npm run lint ${{ parameters.lintParams }}'
+  condition: and(succeeded(), eq('${{ parameters.prTrigger }}', 'true'))
+  displayName: 'Validate lint fixes'
+  workingDirectory: '${{ parameters.workingDirectory }}'
+
+- script: 'npm run test ${{ parameters.testParams }}'
+  condition: and(succeeded(), eq('${{ parameters.prTrigger }}', 'true'))
+  displayName: 'Run tests'
+  workingDirectory: '${{ parameters.workingDirectory }}'
+
+- script: 'npm run build ${{ parameters.buildParams }}'
+  displayName: 'Build artifacts'
+  workingDirectory: '${{ parameters.workingDirectory }}'
+  continueOnError: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifacts'
+  inputs:
+    PathtoPublish: '${{ parameters.workingDirectory }}${{ parameters.buildArtifactPath }}'
+    ArtifactName: 'dist'
+
+- template: ./steps-package-publish.yml
+  parameters:
+    masterTrigger: ${{ parameters.masterTrigger }}
+    workingDirectory: ${{ parameters.workingDirectory }}
+    packageFeed: ${{ parameters.packageFeed }}
+    packageOrgName: ${{ parameters.packageOrgName }}
+    packageRegistry: ${{ parameters.packageRegistry }}
+    packageNameSpace: ${{ parameters.packageNameSpace }}
+    packagePublishPath: ${{ parameters.packagePublishPath }}
+    packagePublishAuthName: ${{ parameters.packagePublishAuthName }}
+    packagePublishAuthToken: ${{ parameters.packagePublishAuthToken }}

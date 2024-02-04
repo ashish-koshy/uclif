@@ -1,0 +1,26 @@
+
+
+# uclif-cli ignore patterns start
+
+bin
+dist
+junit
+publish
+coverage
+ci-tools
+node_modules
+commitlint.config.js
+src/main.ts
+src/test.ts
+src/polyfills.ts
+**/apps/**/src/main.ts
+**/apps/**/src/test.ts
+**/apps/**/src/polyfills.ts
+**/apps/**/src/bootstrap.ts
+**/apps/**/src/test-setup.ts
+**/apps/**/**.webpack.**
+*.yml
+**/apps/**/*.yml
+
+# uclif-cli ignore patterns end
+

@@ -1,0 +1,29 @@
+
+steps:
+- task: PublishTestResults@2
+  displayName: 'Test Results - ${{ parameters.projectName }}'
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TESTS-*.xml'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Code Coverage - ${{ parameters.projectName }}'
+  condition: and(succeeded(), eq('${{ parameters.prTrigger }}', 'true'))
+  continueOnError: false
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '${{ parameters.coberturaSummaryFileLocation }}'
+    reportDirectory: '${{ parameters.coberturaReportDirectory }}'
+    
+- task: BuildQualityChecks@8
+  displayName: 'Coverage % Check - ${{ parameters.projectName }}'
+  condition: and(succeeded(), eq('${{ parameters.prTrigger }}', 'true'))
+  timeoutInMinutes: 10
+  inputs:
+    checkCoverage: true
+    coverageType: 'custom'
+    coverageFailOption: 'fixed'
+    customCoverageType: 'Lines'
+    coverageThreshold: '${{ parameters.coverageThreshold }}'
+    runTitle: 'Check if code coverage % is preserved from previous build'

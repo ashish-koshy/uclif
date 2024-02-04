@@ -1,0 +1,12 @@
+
+variables: 
+- name: prTrigger
+  ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+    value: 'true'
+  ${{ else }}:
+    value: 'false'
+- name: masterTrigger
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+    value: 'true'
+  ${{ else }}:
+    value: 'false'

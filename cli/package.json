@@ -1,0 +1,96 @@
+{
+    "name": "@uclif/cli",
+    "version": "16.0.0",
+    "description": "CLI tool for client side projects",
+    "author": "Ashish Koshy",
+    "bin": {
+        "uclif": "./bin/run"
+    },
+    "main": "dist/index.js",
+    "repository": "https://github.com/ashish-koshy/uclif/blob/main/cli",
+    "homepage": "https://github.com/ashish-koshy/uclif/blob/main/cli/README.md",
+    "files": [
+        "/bin",
+        "/dist",
+        "/CHANGELOG.md",
+        "/npm-shrinkwrap.json",
+        "/oclif.manifest.json"
+    ],
+    "dependencies": {
+        "@oclif/core": "^2",
+        "figlet": "^1.6.0",
+        "fs-extra": "^11.1.1",
+        "is-ci": "^3.0.1",
+        "kebab-case": "^1.0.2",
+        "node-html-parser": "^6.1.11",
+        "semver": "^7.5.4"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^18.4.3",
+        "@commitlint/config-conventional": "^18.4.3",
+        "@oclif/test": "^2.4.7",
+        "@types/chai": "^4",
+        "@types/figlet": "^1.5.6",
+        "@types/fs-extra": "^11.0.1",
+        "@types/is-ci": "^3.0.4",
+        "@types/mocha": "^9.0.0",
+        "@types/node": "^16.18.47",
+        "@types/semver": "^7.5.2",
+        "chai": "^4",
+        "eslint": "^7.32.0",
+        "eslint-config-oclif": "^4",
+        "eslint-config-oclif-typescript": "^1.0.3",
+        "husky": "^8.0.3",
+        "lint-staged": "^15.1.0",
+        "mocha": "^9",
+        "oclif": "^3.14.0",
+        "pretty-quick": "^3.1.3",
+        "shx": "^0.3.3",
+        "standard-version": "^9.5.0",
+        "ts-node": "^10.9.1",
+        "tslib": "^2.6.2",
+        "typescript": "^4.9.5"
+    },
+    "oclif": {
+        "bin": "uclif",
+        "dirname": "uclif",
+        "commands": "./dist/commands"
+    },
+    "scripts": {
+        "clean": "shx rm -rf tsconfig.tsbuildinfo oclif.manifest.json dist",
+        "build": "npm run clean && tsc -b",
+        "prepare-artifacts": "node ci-tools/prepare-artifacts",
+        "lint": "eslint . --ext .ts --config .eslintrc",
+        "readme": "npx oclif readme",
+        "manifest": "npx oclif manifest",
+        "postpack": "shx rm -f oclif.manifest.json",
+        "prepack": "npm run build && npm run manifest",
+        "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+        "version": "npm run clean && npm run readme && git add README.md package.json",
+        "publish-local": "npm run prepack && npm i -g .",
+        "create-command": "npx oclif generate command",
+        "debug": "node bin/dev",
+        "prepare": "cd ../ && husky install ./cli/.husky",
+        "husky": "husky",
+        "lint-staged": "lint-staged",
+        "pretty-quick": "pretty-quick",
+        "commitlint": "commitlint --edit",
+        "standard-version": "standard-version",
+        "generate-readme": "npm run prepack",
+        "release": "standard-version",
+        "pack": "npm pack"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    },
+    "keywords": [
+        "oclif",
+        "uclif"
+    ],
+    "types": "dist/index.d.ts",
+    "lint-staged": {
+        "*.{js,ts}": [
+            "npm run lint"
+        ]
+    }
+}

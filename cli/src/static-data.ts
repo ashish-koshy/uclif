@@ -1,0 +1,42 @@
+export const staticData = {
+  versions: {
+    nx: '16.0.0',
+    eslint: '^8.0.0',
+    prettier: '^2.5.0',
+    prettyQuick: '^3.0.0',
+    husky: '^8.0.0',
+  },
+  externalLinks: {
+    nx: 'https://nx.dev/recipes',
+    husky: 'https://typicode.github.io/husky/guide.html',
+    moduleFederation: 'https://webpack.js.org/concepts/module-federation/',
+    selfDocumentation: 'https://github.com/ashish-koshy/uclif',
+  },
+  lintFormatIgnorePatterns: [
+    '\n\n# uclif-cli ignore patterns start\n',
+    'bin',
+    'dist',
+    'junit',
+    'publish',
+    'coverage',
+    'ci-tools',
+    'node_modules',
+    'commitlint.config.js',
+    'src/main.ts',
+    'src/test.ts',
+    'src/polyfills.ts',
+    '**/apps/**/src/main.ts',
+    '**/apps/**/src/test.ts',
+    '**/apps/**/src/polyfills.ts',
+    '**/apps/**/src/bootstrap.ts',
+    '**/apps/**/src/test-setup.ts',
+    '**/apps/**/**.webpack.**',
+    '*.yml',
+    '**/apps/**/*.yml',
+    '\n# uclif-cli ignore patterns end\n\n',
+  ],
+  authors: [
+    'Ashish Koshy',
+  ],
+}
+

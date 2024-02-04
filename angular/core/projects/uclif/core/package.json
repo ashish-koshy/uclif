@@ -1,0 +1,21 @@
+{
+    "name": "@uclif/ng-core",
+    "version": "16.0.0",
+    "scripts": {
+        "release": "standard-version"
+    },
+    "peerDependencies": {
+        "@angular/common": "^15.0.0 || ^16.0.0 || ^17.0.0",
+        "@angular/core": "^15.0.0 || ^16.0.0 || ^17.0.0"
+    },
+    "dependencies": {
+        "tslib": "^2.3.0"
+    },
+    "author": "Ashish Koshy",
+    "repository": "https://github.com/ashish-koshy/uclif/blob/main/angular/core",
+    "homepage": "https://github.com/ashish-koshy/uclif/blob/main/angular/core/README.md",
+    "engines": {
+        "node": "^14.20.0 || ^16.13.0 || ^18.10.0",
+        "npm": "^6.x.x || ^8.x.x || ^9.x.x"
+    }
+}

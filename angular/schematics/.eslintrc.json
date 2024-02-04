@@ -1,0 +1,39 @@
+{
+    "root": true,
+    "overrides": [
+        {
+            "files": ["*.ts"],
+            "parserOptions": {
+                "createDefaultProgram": true,
+                "project": ["tsconfig.json"]
+            },
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking"
+            ],
+            "rules": {
+                "radix": "warn",
+                "no-console": "error",
+                "default-case": "warn",
+                "prefer-const": "warn",
+                "no-fallthrough": "warn",
+                "no-const-assign": "error",
+                "no-return-assign": "error",
+                "no-nested-ternary": "warn",
+                "no-unneeded-ternary": "warn",
+                "prefer-arrow-callback": "warn",
+                "@typescript-eslint/unbound-method": "off",
+                "@typescript-eslint/no-unused-vars": "off",
+                "@typescript-eslint/no-this-alias": "error",
+                "@typescript-eslint/no-unsafe-return": "warn",
+                "@typescript-eslint/no-explicit-any": "error",
+                "@typescript-eslint/no-floating-promises": "off",
+                "@typescript-eslint/no-unsafe-assignment": "off",
+                "@typescript-eslint/no-use-before-define": "error",
+                "@typescript-eslint/no-unsafe-member-access": "warn"
+            }
+        }
+    ],
+    "ignorePatterns": []
+}

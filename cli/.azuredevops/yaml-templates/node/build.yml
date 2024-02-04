@@ -1,0 +1,107 @@
+
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+#
+# YAML Schema:
+# https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json
+
+trigger:
+  branches:
+    include:
+      - master
+  
+  paths:
+    include:
+      - cli/*
+
+variables:
+  - template: ./variables.yml
+
+parameters: 
+  - name: nodeVersion
+    type: string
+    displayName: node-version
+    default: '16.15.0'
+  - name: installParams
+    type: string
+    displayName: install-params
+    default: ' '
+  - name: lintParams
+    type: string
+    displayName: lint-params
+    default: ' '
+  - name: testParams
+    type: string
+    displayName: test-params
+    default: ' '
+  - name: buildParams
+    type: string
+    displayName: build-params
+    default: ' '
+  - name: workingDirectory
+    type: string
+    displayName: working-directory
+    default: './cli/'
+  - name: buildArtifactPath
+    type: string
+    displayName: build-artifact-path
+    default: './dist'
+  - name: packageFeed
+    type: string
+    displayName: package-feed
+    default: '$(packageFeed)'
+  - name: packageOrgName
+    type: string
+    displayName: package-org-name
+    default: '$(packageOrgName)'
+  - name: packageRegistry
+    type: string
+    displayName: package-registry
+    default: '$(packageRegistry)'
+  - name: packageNameSpace
+    type: string
+    displayName: package-name-space
+    default: '@uclif'
+  - name: packagePublishPath
+    type: string
+    displayName: package-publish-path
+    default: './'
+  - name: packagePublishAuthName
+    type: string
+    displayName: package-publish-auth-name
+    default: '$(packagePublishAuthName)'
+  - name: packagePublishAuthToken
+    type: string
+    displayName: package-publish-auth-token
+    default: '$(packagePublishAuthToken)'
+  
+stages:
+- stage: 'BuildStage'
+  displayName: 'Build Stage'
+  jobs: 
+  - job: 'ExecuteJob'
+    displayName: 'Execute Job'
+    pool:
+      vmImage: ubuntu-latest
+      demands: npm
+    steps:
+    - template: ./steps.yml
+      parameters:
+        prTrigger: ${{ variables.prTrigger }}
+        masterTrigger: ${{ variables.masterTrigger }} 
+        nodeVersion: ${{ parameters.nodeVersion }}
+        installParams: ${{ parameters.installParams }}
+        lintParams: ${{ parameters.lintParams }}
+        testParams: ${{ parameters.testParams }}
+        buildParams: ${{ parameters.buildParams }}
+        workingDirectory: ${{ parameters.workingDirectory }}
+        buildArtifactPath: ${{ parameters.buildArtifactPath }}
+        packageFeed: ${{ parameters.packageFeed }}
+        packageOrgName: ${{ parameters.packageOrgName }}
+        packageRegistry: ${{ parameters.packageRegistry }}
+        packageNameSpace: ${{ parameters.packageNameSpace }}
+        packagePublishPath: ${{ parameters.packagePublishPath }}
+        packagePublishAuthName: ${{ parameters.packagePublishAuthName }}
+        packagePublishAuthToken: ${{ parameters.packagePublishAuthToken }}

@@ -1,0 +1,14 @@
+**/.DS_Store
+*-debug.log
+*-error.log
+/.idea
+/.nyc_output
+/dist
+/publish
+/lib
+/tmp
+node_modules
+oclif.manifest.json
+tsconfig.tsbuildinfo
+.github
+.env

@@ -1,0 +1,29 @@
+
+steps:
+- task: SonarQubePrepare@4
+  displayName: 'Code Analysis Config - ${{ parameters.projectName }}'
+  condition: and(succeeded(), eq('${{ parameters.prTrigger }}', 'true'))
+  inputs:
+    SonarQube: 'Sonar-Qube'
+    cliSources: '.'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: '${{ parameters.cliProjectKey }}'
+    cliProjectName: '${{ parameters.cliProjectName }}'
+    extraProperties: |
+      sonar.test=${{ parameters.sonarTest }}
+      sonar.exclusions=${{ parameters.sonarExclusions }}
+      sonar.test.inclusions=${{ parameters.sonarTestInclusions }}
+      sonar.javascript.lcov.reportPaths=${{ parameters.sonarJsLcovReportPaths }}
+
+- task: SonarQubeAnalyze@4
+  displayName: 'Code Analysis - ${{ parameters.projectName }}'
+  condition: and(succeeded(), eq('${{ parameters.prTrigger }}', 'true'))
+  continueOnError: false
+
+- task: SonarQubePublish@4
+  displayName: 'Code Analysis Report - ${{ parameters.projectName }}'
+  condition: and(succeeded(), eq('${{ parameters.prTrigger }}', 'true'))
+  continueOnError: true
+  inputs:
+    pollingTimeoutSec: '300'
